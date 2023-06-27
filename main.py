@@ -15,9 +15,10 @@ def hello_world():
     # generate response from user input
     if request.method == "POST":
         user_prompt = request.form.get('user-question')
-        return render_template("index.html", user_prompt=user_prompt)
-    #messages = [{"role": "user", "content": user_prompt}]
-    #result = gptj.chat_completion(messages)
+        messages = [{"role": "user", "content": user_prompt}]
+        result = gptj.chat_completion(messages)
+        return render_template("index.html", user_prompt=result)
+    
 
     return render_template("index.html", user_prompt="")
 
