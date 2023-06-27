@@ -45,6 +45,12 @@ body {
   font-size: 25px;
 }
 
+.response-box {
+  border: solid;
+  width: 100%;
+  padding: 10px;
+}
+
 .team-title {
   padding-top: 12rem;
 }
