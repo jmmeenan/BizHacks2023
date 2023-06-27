@@ -33,7 +33,7 @@ body {
   border: solid;
   background: black;
   color: white;
-  width: 100%;
+  width: 103%;
   height: 35px;
 }
 
@@ -47,6 +47,7 @@ body {
 
 .response-box {
   border: solid;
+  border-radius: 20px;
   padding: 10px;
 }
 
