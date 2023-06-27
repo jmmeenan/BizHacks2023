@@ -1,8 +1,11 @@
 #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
 
 from flask import Flask, render_template, request
+from gpt4all import GPT4All
 
 app = Flask(__name__)
+gptj = GPT4All("ggml-gpt4all-j-v1.3-groovy")
+
 
 """ File path directions """
 class FilePath:
@@ -15,6 +18,8 @@ def hello_world():
     if request.method == "POST":
         user_prompt = request.form.get('user-question')
         return render_template("index.html", user_prompt=user_prompt)
-    
+    #messages = [{"role": "user", "content": user_prompt}]
+    #result = gptj.chat_completion(messages)
+
     return render_template("index.html", user_prompt="")
 
