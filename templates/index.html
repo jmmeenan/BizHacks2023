@@ -5,17 +5,19 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css')  }}"
   </head>
   <body>
-    <h1>Chat Checker</h1>
 
-    <form action="/" method="POST">
-      <!-- <label for="userQuestion">Enter your question:</label> -->
-      <input type="text" name="userQuestion" class="userQuestion" placeholder="Enter your question" />
-      <button type="submit" id="checkButton">Check</button>
-    </form>
+    <div class="main-container">
+      <div class="main-title">chat_checker</div>
 
-    <h2>Response:</h2>
-    <div id="response">
-      {{user_prompt}}
+      <form class="user-form" action="/" method="POST">
+        <input type="text" name="user-question" class="user-question" placeholder="Enter your question" />
+        <button type="submit" id="checkButton">Check</button>
+      </form>
+
+      <div class="response-section">
+        <div class="response-title">Response:</div>
+        {{user_prompt}}
+      </div>
     </div>
 
   </body>
