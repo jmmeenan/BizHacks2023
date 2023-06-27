@@ -1,4 +1,4 @@
-#Working Code
+#Working
 from flask import Flask, render_template, request
 import gpt4all
 
@@ -18,7 +18,14 @@ def hello_world():
         user_prompt = request.form.get('user-question')
         messages = [{"role": "user", "content": user_prompt}]
         result = gptj.chat_completion(messages)
-        return render_template("index.html", user_prompt=result)
+        
+        if len(result) == 0:
+            print("No response")
+        else:
+            lst = result.get('choices')[0].get('message').get('content') # this is how you get the raw output string
+            print(lst)
+
+        return render_template("index.html", user_prompt=lst)
     
 
     return render_template("index.html", user_prompt="")
