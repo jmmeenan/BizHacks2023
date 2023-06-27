@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
-from gpt4all import GPT4All
+import gpt4all
 
 app = Flask(__name__)
-gptj = GPT4All("ggml-gpt4all-j-v1.3-groovy")
+gptj = gpt4all.GPT4All("ggml-gpt4all-j-v1.3-groovy")
 
 
 """ File path directions """
@@ -11,7 +11,7 @@ class FilePath:
 
 @app.route("/", methods=["GET", "POST"])
 def hello_world():
-    
+
     # generate response from user input
     if request.method == "POST":
         user_prompt = request.form.get('user-question')
