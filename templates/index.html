@@ -1,30 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Chat Checker</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css')  }}"
-  </head>
-  <body>
-
-    <div class="main-container">
-      <div class="main-title">chat_checker</div>
-
-      <form class="user-form" action="/" method="POST">
-        <input type="text" name="user-question" class="user-question" placeholder="Enter your question" />
-        <button type="submit" id="checkButton">Check</button>
+<head>
+  <title>CogniSys</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <h1 class="title">CogniSys</h1>
+      <p class="subtitle">Empowering Consulting with Intelligent Insights</p>
+      <form class="user-form" action="/" method="POST" enctype="multipart/form-data">
+        <div class="input-wrapper">
+          <input type="text" name="user-question" class="user-question" placeholder="How can I help?" />
+          <button type="submit" class="check-button">Ask Me!</button>
+        </div>
+        <div class="file-input-wrapper">
+          <label for="file-upload" class="file-label">Choose Files</label>
+          <input type="file" name="files" id="file-upload" multiple onchange="displaySelectedFiles(this)" style="display: none;">
+          <span class="file-names" id="selected-files">No files chosen</span>
+        </div>
       </form>
-
       <div class="response-section">
-        <div class="response-title">Response:</div>
+        <h2 class="response-title">Here's what I found:</h2>
         <div class="response-box">
-          {{user_prompt}}
+          {{ user_prompt }}
         </div>
       </div>
     </div>
-
-    <div class="team-title">
-      <p>Product of <strong><em>Hack-A-thletes</em</strong></p>
+    <div class="attribution">
+      <p>Product of <strong>Hack-A-thletes</strong></p>
     </div>
+  </div>
 
-  </body>
+  <script>
+    function displaySelectedFiles(input) {
+      var fileNames = "";
+      for (var i = 0; i < input.files.length; i++) {
+        fileNames += input.files[i].name + ", ";
+      }
+      fileNames = fileNames.slice(0, -2); // Remove the trailing comma and space
+      document.getElementById("selected-files").textContent = fileNames;
+    }
+  </script>
+</body>
 </html>
