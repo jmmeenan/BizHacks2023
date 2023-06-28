@@ -74,14 +74,14 @@ def get_file_content(file):
 def prompt():
     if request.method != "POST": 
         return render_template("index.html", user_prompt="")
-    
+
     # Add user question to messages
     user_prompt = str(request.form.get('user-question'))
     messages = [
         {"role": "system", "content": Prompt.Text},
         {"role": "user", "content": user_prompt},
     ]
-    
+
     # Gather file contents
     file_contents = ""
     if 'files' in request.files:
@@ -94,7 +94,7 @@ def prompt():
     # Write file content with wrapped delimiters to messages content
     if file_contents:
         messages[0]["content"] += "\n" + Prompt.Delimiter + file_contents + Prompt.Delimiter
-    
+
     # Get response
     response = ""
     if len(messages) > 0:

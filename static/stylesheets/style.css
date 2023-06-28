@@ -1,4 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Jost:ital,wght@1,100&family=Libre+Bodoni:ital@0;1&display=swap');
+
+/*
+For reference...
+font-family: 'Inter', Arial, sans-serif;
+font-family: 'Jost', Arial, sans-serif;
+font-family: 'Libre Bodoni', Arial, sans-serif;
+*/
+
 body {
+  font-family: 'Inter', Arial, sans-serif;
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
@@ -26,6 +36,7 @@ body {
 .container {
   width: 100%;
   max-width: 600px;
+  height: 100%;
   padding: 40px;
   background-color: #292929;
   border-radius: 16px;
@@ -33,7 +44,7 @@ body {
 }
 
 .title {
-  font-size: 40px;
+  font-size: 55px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
@@ -59,6 +70,7 @@ body {
   font-size: 20px;
   background-color: #424242;
   color: #ffffff;
+  text-align: center;
 }
 
 .check-button {
@@ -67,7 +79,7 @@ body {
   background-color: #000000;
   color: #ffffff;
   width: 120px;
-  height: 50px;
+  height: 82px;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
@@ -81,6 +93,7 @@ body {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .response-box {
@@ -90,7 +103,7 @@ body {
   font-size: 20px;
   background-color: #424242;
   color: #ffffff;
-  height: 300px;
+  height: 350px;
   resize: vertical;
 }
 
@@ -99,11 +112,11 @@ body {
   color: #808080;
   font-size: 18px;
   margin-top: 40px;
-  padding-bottom: 20px;
+  padding-bottom: 0px;
 }
 
 .subtitle {
-  font-size: 18px;
+  font-size: 22px;
   text-align: center;
   color: #808080;
 }
@@ -118,9 +131,12 @@ body {
   background-color: #000000;
   color: #ffffff;
   padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 16px;
   cursor: pointer;
   margin-right: 10px;
+  padding: 20px;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 
 .file-names {
