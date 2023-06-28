@@ -15,3 +15,8 @@ python3 -m flask --app main run
 
 ## Finally
 Enjoy!
+
+## Presentation
+
+https://tome.app/customerserviceai/revolutionizing-customer-service-how-ai-can-transform-your-business-cljf0g8j70f7bmw3chin67ogz
+
