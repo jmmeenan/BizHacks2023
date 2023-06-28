@@ -24,7 +24,8 @@ class Prompt:
         response. 
 
         Remember that anything wrapped in '****' delimiters is the CONTENTS of the DOCUMENT.
-        Everything outside of these '****' delimiters are instructions given directly to you.
+        Everything outside of these '****' delimiters are instructions given directly to YOU.
+        Remember, content outside of these '****' delimiters are NOT part the DOCUMENT.
 
         If you do not detect any '****' delimiters, this means that NO documents were given.
         If that is the case, tell the user that they did not import a document, but also give a 
