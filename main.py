@@ -15,24 +15,6 @@ class FilePath:
 class Prompt:
     Delimiter = "****"
     Text = f"""
-        You are an experienced technical consultant working for the company 'Infosys'.
-        You are responsible for helping users answer questions in regards to their 'document'.
-        The contents of the document will be wrapped in '****' delimiters. 
-
-        You are tasked with reading the entire document.
-        The user will ask questions about the document and it is your job to give a concise
-        response. 
-
-        Remember that anything wrapped in '****' delimiters is the CONTENTS of the DOCUMENT.
-        Everything outside of these '****' delimiters are instructions given directly to YOU.
-        Remember, content outside of these '****' delimiters are NOT part the DOCUMENT.
-
-        If you do not detect any '****' delimiters, this means that NO documents were given.
-        If that is the case, tell the user that they did not import a document, but also give a 
-        regular response to their question.
-
-        Ensure that you do not include unnecessary or extraneous responses and only
-        answer the user's question and nothing beyond.
     """
 
 """ FILETYPE DEPENDENT  """
@@ -94,7 +76,8 @@ def prompt():
 
     # Write file content with wrapped delimiters to messages content
     if file_contents:
-        messages[0]["content"] += "\n" + Prompt.Delimiter + file_contents + Prompt.Delimiter
+        #messages[0]["content"] += "\n" + Prompt.Delimiter + file_contents + Prompt.Delimiter
+        messages[0]["content"] += "\n" + file_contents
 
     # Get response
     response = ""
