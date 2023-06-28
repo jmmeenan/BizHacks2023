@@ -12,6 +12,18 @@ gptj = gpt4all.GPT4All("ggml-gpt4all-j-v1.3-groovy")
 class FilePath:
     Response = "templates/response.html"
 
+class Prompt:
+    Delimiter = "****"
+    Text = f"""
+        You are a technical consultant for the company Infosys. You are
+        responsible for helping users answer questions regarding information about
+        their document. 
+
+        The document will be wrapped in **** delimiters and you are tasked to read
+        through the entire document. The user will ask questions about
+        the document and it is your job to give a concise response. Do not 
+        include unnecessary or extraneous responses, otherwise you will lose your job.
+    """
 
 """ FILETYPE DEPENDENT  """
 def read_text(file):
@@ -51,37 +63,43 @@ def get_file_content(file):
 """ DISPLAY """
 @app.route("/", methods=["GET", "POST"])
 def prompt():
-    if request.method == "POST":
-        user_prompt = request.form.get('user-question')
-        messages = [{"role": "user", "content": user_prompt}]
+    if request.method != "POST": 
+        return render_template("index.html", user_prompt="")
+    
+    # Add user question to messages
+    user_prompt = str(request.form.get('user-question'))
+    messages = [
+        {"role": "system", "content": Prompt.Text},
+        {"role": "user", "content": user_prompt},
+    ]
+    
+    # Gather file contents
+    file_contents = ""
+    if 'files' in request.files:
+        files = request.files.getlist('files')
+        for file in files:
+            content = get_file_content(file)
+            if content:
+                file_contents += content + "\n"
 
-        file_contents = ""
-        if 'files' in request.files:
-            files = request.files.getlist('files')
-            for file in files:
-                content = get_file_content(file)
-                if content:
-                    file_contents += content + "\n"
+    # Write file content with wrapped delimiters to messages content
+    if file_contents:
+        messages[0]["content"] += "\n" + Prompt.Delimiter + file_contents + Prompt.Delimiter
+    
+    # Get response
+    response = ""
+    if len(messages) > 0:
+        result = gptj.chat_completion(messages)
+        response = result.get('choices')[0].get('message').get('content')
 
-        if file_contents:
-            messages[0]["content"] += "\n" + file_contents
+    if len(response) == 0:
+        lst = ""
+        print("No response")
+    else:
+        lst = response
+        print(lst)
 
-        response = ""
-        if len(messages) > 0:
-            result = gptj.chat_completion(messages)
-            response = result.get('choices')[0].get('message').get('content')
-
-        if len(response) == 0:
-            print("No response")
-            lst = ""
-        else:
-            lst = response
-            print(lst)
-
-        return render_template("index.html", user_prompt=lst)
-
-    return render_template("index.html", user_prompt="")
-
+    return render_template("index.html", user_prompt=lst)
 
 if __name__ == "__main__":
     app.run(debug=True)
