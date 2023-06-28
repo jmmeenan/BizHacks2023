@@ -23,6 +23,9 @@ class Prompt:
         through the entire document. The user will ask questions about
         the document and it is your job to give a concise response. Do not 
         include unnecessary or extraneous responses, otherwise you will lose your job.
+
+        Remember that anything wrapped in **** delimiters is the contents of the DOCUMENT.
+        Everything outside is instructions given directly to you.
     """
 
 """ FILETYPE DEPENDENT  """
