@@ -7,3 +7,11 @@
 - magic
 - PyPDF2
 - python-docx
+
+## Run with the following command
+flask --app main run
+OR
+python3 -m flask --app main run
+
+## Finally
+Enjoy!
