@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request
 import magic
-import io
 import gpt4all
+import PyPDF2
+from docx import Document
 
+""" SET UP GPT4ALL """
 app = Flask(__name__)
 gptj = gpt4all.GPT4All("ggml-gpt4all-j-v1.3-groovy")
 
@@ -11,12 +13,12 @@ class FilePath:
     Response = "templates/response.html"
 
 
+""" FILETYPE DEPENDENT  """
 def read_text(file):
     return file.read().decode('utf-8')
 
 
 def read_pdf(file):
-    import PyPDF2
     pdf_reader = PyPDF2.PdfReader(file)
     text = ""
     for page in pdf_reader.pages:
@@ -25,7 +27,6 @@ def read_pdf(file):
 
 
 def read_docx(file):
-    from docx import Document
     doc = Document(file)
     text = ""
     for paragraph in doc.paragraphs:
@@ -47,9 +48,9 @@ def get_file_content(file):
         return ""
     return content
 
-
+""" DISPLAY """
 @app.route("/", methods=["GET", "POST"])
-def hello_world():
+def prompt():
     if request.method == "POST":
         user_prompt = request.form.get('user-question')
         messages = [{"role": "user", "content": user_prompt}]
